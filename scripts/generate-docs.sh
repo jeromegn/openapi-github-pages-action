@@ -14,7 +14,7 @@
 # 6. Caller has set the following environment variables:
 #    1. API_CONFIGS - JSON string configuring API generation for each OpenAPI spec
 #    2. API_DOCS_DIR - parent directory to use for generated API docs
-set -e
+set -ex
 
 # Validate prerequisites installed
 if ! command -v jq &> /dev/null
