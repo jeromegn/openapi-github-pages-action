@@ -60,11 +60,10 @@ mkdir -p $API_DOCS_DIR
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 apiConfigsSplitToOnePerLine=$(echo $API_CONFIGS | jq -c .[])
-for apiConfig in $apiConfigsSplitToOnePerLine
-do
+while IFS= read -r apiConfig; do
     echo "Running script to generate API docs for config: $apiConfig"
     source $script_dir/generate-single-spec-doc.sh $apiConfig
-done
+done < <(printf '%s' "$apiConfigsSplitToOnePerLine")
 
 # Return to original directory for subsequent actions
 cd $WORKSPACE_DIR
